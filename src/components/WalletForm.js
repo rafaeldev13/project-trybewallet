@@ -71,6 +71,11 @@ class WalletForm extends React.Component {
               Saúde
             </option>
           </select>
+          <button
+            type="button"
+          >
+            Adicionar despesa
+          </button>
         </form>
       </div>
     );
