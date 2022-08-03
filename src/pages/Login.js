@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import emailAction from '../redux/actions';
+import { emailAction } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -54,6 +54,7 @@ class Login extends React.Component {
       <div>
         <form>
           <label htmlFor="email-input">
+            Email:
             <input
               data-testid="email-input"
               type="email"
@@ -65,6 +66,7 @@ class Login extends React.Component {
           <label
             htmlFor="password"
           >
+            Password:
             <input
               type="password"
               data-testid="password-input"
