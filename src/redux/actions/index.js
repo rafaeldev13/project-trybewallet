@@ -12,6 +12,11 @@ export const getCoinAction = (payload) => ({
   payload,
 });
 
+export const valueFromWaletInput = (expenses) => ({
+  type: 'GET_EXPENSES',
+  expenses,
+});
+
 export function fecthCurrency() {
   return (dispatch) => fetch('https://economia.awesomeapi.com.br/json/all')
     .then((response) => response.json())
