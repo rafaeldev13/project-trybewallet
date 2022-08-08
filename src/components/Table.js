@@ -19,7 +19,7 @@ class Table extends Component {
             </tr>
           </thead>
           <tbody>
-            <button
+            {/* <button
               type="button"
               data-testid="edit-btn"
             >
@@ -31,7 +31,7 @@ class Table extends Component {
               data-testid="delete-btn"
             >
               Excluir
-            </button>
+            </button> */}
           </tbody>
         </table>
       </div>

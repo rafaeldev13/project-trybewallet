@@ -7,13 +7,13 @@ class WalletForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      id: 0,
+      // id: 0,
       value: '',
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
-      exchangeRates: '',
+      // exchangeRates: '',
     };
   }
 
@@ -29,16 +29,43 @@ class WalletForm extends React.Component {
     }));
   }
 
-  handleClick = () => {
-    const { expensesState } = this.props;
-    const response = fecthCurrency();
-    this.setState({ exchangeRates: response });
-    expensesState(this.state);
-    this.setState((prevState) => ({
-      id: prevState.id + 1,
-    }));
-    this.setState({ value: '', description: '' });
-  };
+  saveExpense = () => {
+    const { value, description, currency, method, tag } = this.state;
+    const { currentId, expensesState } = this.props;
+
+    const expenseInfo = {
+      id: currentId,
+      value,
+      description,
+      currency,
+      method,
+      tag,
+    };
+    expensesState(expenseInfo);
+    this.setState({
+      value: '',
+      description: '',
+    });
+  }
+
+  updateExpenses = () => {
+    const { expenses, idToEdit, updateExpensesOnStore, editorMode } = this.props;
+    const { value, description, currency, method, tag } = this.state;
+
+    const updatedExpenses = expenses.map((expense) => {
+      if (expense.id === idToEdit) {
+        expense.value = value;
+        expense.description = description;
+        expense.currency = currency;
+        expense.method = method;
+        expense.tag = tag;
+      }
+      return expense;
+    });
+
+    updateExpensesOnStore(updatedExpenses);
+    editorMode();
+  }
 
   render() {
     const { currenciesState } = this.props;
@@ -123,7 +150,7 @@ class WalletForm extends React.Component {
           </select>
           <button
             type="button"
-            onClick={ this.handleClick }
+            onClick={ this.saveExpense }
           >
             Adicionar despesa
           </button>

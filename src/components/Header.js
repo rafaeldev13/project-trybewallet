@@ -5,11 +5,15 @@ import propTypes from 'prop-types';
 class Header extends Component {
   sumValue = () => {
     const { expenses } = this.props;
-    const getSumValue = expenses.reduce(
-      (acc, curr) => acc + curr.value * curr.exchangeRates[curr.currency].ask,
-      0,
-    );
-    return getSumValue.toFixed(2);
+    let sumValue = 0;
+
+    expenses.forEach((expense) => {
+      const { currency } = expense;
+      const currencyValue = expense.exchangeRates[currency].ask;
+      sumValue += expense.value * currencyValue;
+    });
+    console.log(sumValue);
+    return sumValue.toFixed(2);
   }
 
   render() {
