@@ -26,3 +26,11 @@ export function fecthCurrency() {
       dispatch(getCoinAction(coin));
     });
 }
+
+export const getCurrency = (expenseInfo) => async (dispatch) => {
+  const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+  const data = await response.json();
+  delete data.USDT;
+  expenseInfo.exchangeRates = data;
+  dispatch(valueFromWaletInput(expenseInfo));
+};

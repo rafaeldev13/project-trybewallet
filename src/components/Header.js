@@ -5,16 +5,22 @@ import propTypes from 'prop-types';
 class Header extends Component {
   sumValue = () => {
     const { expenses } = this.props;
-    let sumValue = 0;
-
-    expenses.forEach((expense) => {
-      const { currency } = expense;
-      const currencyValue = expense.exchangeRates[currency].ask;
-      sumValue += expense.value * currencyValue;
-    });
-    console.log(sumValue);
-    return sumValue.toFixed(2);
+    // const sumValue = 0;
+    const getSum = expenses.reduce((acc, curr) => (acc + Number(curr.value)
+   * Number(curr.exchangeRates[curr.currency].ask)), 0).toFixed(2);
+    return getSum;
   }
+
+  //   expenses.forEach((expense) => {
+  //     const { currency } = expense;
+  //     const currencyValue = expense.exchangeRates[currency].ask;
+  //     sumValue += expense.value * currencyValue;
+  //     console.log(currencyValue);
+  //   });
+
+  //   console.log(expenses);
+  //   return sumValue.toFixed(2);
+  // }
 
   render() {
     const { emailProps } = this.props;
@@ -44,7 +50,7 @@ const mapStateToProps = (state) => ({
 
 Header.propTypes = {
   emailProps: propTypes.string,
-  expenses: propTypes.arrayOf(propTypes.object).isRequired,
+  expenses: propTypes.arrayOf(propTypes.object),
 }.isRequired;
 
 export default connect(mapStateToProps)(Header);

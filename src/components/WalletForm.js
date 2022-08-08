@@ -1,19 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fecthCurrency, valueFromWaletInput } from '../redux/actions';
+import { fecthCurrency, getCurrency } from '../redux/actions';
 
 class WalletForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      // id: 0,
+      id: 0,
       value: '',
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
-      // exchangeRates: '',
     };
   }
 
@@ -30,11 +29,11 @@ class WalletForm extends React.Component {
   }
 
   saveExpense = () => {
-    const { value, description, currency, method, tag } = this.state;
-    const { currentId, expensesState } = this.props;
+    const { value, description, currency, method, tag, id } = this.state;
+    const { expensesState } = this.props;
 
     const expenseInfo = {
-      id: currentId,
+      id,
       value,
       description,
       currency,
@@ -45,6 +44,7 @@ class WalletForm extends React.Component {
     this.setState({
       value: '',
       description: '',
+      id: id + 1,
     });
   }
 
@@ -75,22 +75,24 @@ class WalletForm extends React.Component {
         <form>
           <label htmlFor="value-input">
             <input
-              type="text"
+              type="number"
               name="value"
               data-testid="value-input"
               value={ value }
               onChange={ this.handleChange }
               placeholder="Insira um valor"
+              id="value-input"
             />
           </label>
           <label htmlFor="description-input">
             <input
-              type="description"
+              type="text"
               name="description"
               data-testid="description-input"
               value={ description }
               onChange={ this.handleChange }
               placeholder="Descrição"
+              id="description-input"
             />
           </label>
           Moeda
@@ -109,7 +111,7 @@ class WalletForm extends React.Component {
               </option>))}
           </select>
           <select
-            name="currency"
+            name="method"
             data-testid="method-input"
             value={ method }
             onChange={ this.handleChange }
@@ -127,7 +129,7 @@ class WalletForm extends React.Component {
           </select>
 
           <select
-            name="currency"
+            name="tag"
             data-testid="tag-input"
             value={ tag }
             onChange={ this.handleChange }
@@ -162,7 +164,7 @@ class WalletForm extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   currenciesDispach: () => dispatch(fecthCurrency()),
-  expensesState: (expenses) => dispatch(valueFromWaletInput(expenses)),
+  expensesState: (expenses) => dispatch(getCurrency(expenses)),
 });
 const mapStateToProps = (state) => ({
   currenciesState: state.wallet.currencies,
