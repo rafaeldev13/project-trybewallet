@@ -2,6 +2,8 @@
 export const ADD_EMAIL = 'ADD_EMAIL';
 export const GET_COIN = 'GET_COIN';
 export const EDIT_TABLE = 'EDIT_TABLE';
+export const REMOVE = 'REMOVE';
+
 export const emailAction = (email) => ({
   type: ADD_EMAIL,
   payload: email,
@@ -19,6 +21,11 @@ export const valueFromWaletInput = (expenses) => ({
 
 export const editTable = (id) => ({
   type: EDIT_TABLE,
+  id,
+});
+
+export const removeExpense = (id) => ({
+  type: REMOVE,
   id,
 });
 
