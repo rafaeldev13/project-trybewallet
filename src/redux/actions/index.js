@@ -1,7 +1,7 @@
 // Coloque aqui suas actions
 export const ADD_EMAIL = 'ADD_EMAIL';
 export const GET_COIN = 'GET_COIN';
-
+export const EDIT_TABLE = 'EDIT_TABLE';
 export const emailAction = (email) => ({
   type: ADD_EMAIL,
   payload: email,
@@ -15,6 +15,11 @@ export const getCoinAction = (payload) => ({
 export const valueFromWaletInput = (expenses) => ({
   type: 'GET_EXPENSES',
   expenses,
+});
+
+export const editTable = (id) => ({
+  type: EDIT_TABLE,
+  id,
 });
 
 export function fecthCurrency() {
