@@ -74,6 +74,7 @@ class WalletForm extends React.Component {
       <div>
         <form>
           <label htmlFor="value-input">
+            Despesa
             <input
               type="number"
               name="value"
@@ -85,6 +86,7 @@ class WalletForm extends React.Component {
             />
           </label>
           <label htmlFor="description-input">
+            Descrição
             <input
               type="text"
               name="description"
@@ -134,6 +136,7 @@ class WalletForm extends React.Component {
             value={ tag }
             onChange={ this.handleChange }
           >
+            categoria
             <option>
               Alimentação
             </option>
