@@ -62,3 +62,18 @@ userEvent.click(buttonInput);
 expect(fetch).not.toHaveBeenCalled();
 });
 })
+
+it('Testa se os inputs para adicionar uma despesa está na tela ', () => {
+    renderWithRouterAndRedux(<Wallet />);
+    const value = screen.getByTestId('value-input');
+    const description = screen.getByTestId('description-input');
+    const currency = screen.getByTestId('currency-input');
+    const method = screen.getByTestId('method-input');
+    const tag = screen.getByTestId('tag-input');
+
+    expect(value).toBeInTheDocument();
+    expect(description).toBeInTheDocument();
+    expect(currency).toBeInTheDocument();
+    expect(method).toBeInTheDocument();
+    expect(tag).toBeInTheDocument();
+  });
